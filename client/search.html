@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Find an event | Harbour Hearts</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/app.js" defer></script>
+    <script src="js/search.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">HH</span
+        ><span>Harbour Hearts<span class="brand-sub">Foundation</span></span></a
+      >
+      <nav class="site-nav">
+        <a href="index.html">Home</a
+        ><a class="active" href="search.html">Find an event</a
+        ><a href="about.html">About us</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-hero">
+        <div class="section-shell">
+          <p class="eyebrow coral">Find your moment</p>
+          <h1>Search events<br /><em>that move you.</em></h1>
+          <p>
+            Choose a date, place or cause and discover a way to make your next
+            outing count.
+          </p>
+        </div>
+      </section>
+      <section class="search-layout section-shell">
+        <aside class="filter-panel">
+          <p class="eyebrow coral">Refine</p>
+          <h2>What feels right?</h2>
+          <form id="search-form" novalidate>
+            <label for="date">From date</label
+            ><input
+              id="date"
+              name="date"
+              type="text"
+              inputmode="numeric"
+              placeholder="DD / MM / YYYY"
+              maxlength="10"
+              autocomplete="off"
+              aria-describedby="date-help"
+            /><small id="date-help" class="field-help"
+              >Enter date as DD / MM / YYYY</small
+            ><label for="location">Location</label
+            ><input
+              id="location"
+              name="location"
+              type="search"
+              placeholder="City or venue"
+            /><label for="category">Category</label
+            ><select id="category" name="category">
+              <option value="">All categories</option></select
+            ><button class="button" type="submit">
+              Search events <span>-></span></button
+            ><button
+              class="button button-quiet"
+              id="clear-filters"
+              type="button"
+            >
+              Clear filters
+            </button>
+            <p id="form-error" class="form-error"></p>
+          </form>
+        </aside>
+        <div class="results-panel">
+          <div class="results-header">
+            <div>
+              <p class="eyebrow coral">Your shortlist</p>
+              <h2>Upcoming events</h2>
+            </div>
+            <span id="result-count" class="result-count"></span>
+          </div>
+          <div id="search-status" class="status"></div>
+          <div id="search-results" class="result-list"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="section-shell footer-inner">
+        <div>
+          <a class="brand brand-footer" href="index.html"
+            ><span class="brand-mark">HH</span
+            ><span
+              >Harbour Hearts<span class="brand-sub">Foundation</span></span
+            ></a
+          >
+        </div>
+        <div class="footer-contact">
+          hello@harbourhearts.org.au<br />+61 2 5550 1840
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
