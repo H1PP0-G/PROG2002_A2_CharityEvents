@@ -583,3 +583,64 @@ h2 {
   display: block;
   margin-top: 14px;
 }
+.event-image img,
+.detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.event-image .event-tag,
+.event-image .event-status {
+  z-index: 1;
+}
+.event-image .image-symbol {
+  z-index: 1;
+}
+.detail-top .event-tag {
+  position: static;
+  display: inline-block;
+}
+.hero-art {
+  background-image: url("../assets/sunrise%20run_cleanup.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  background-image: url("../assets/protect%20see2.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(33, 69, 76, 0.72);
+  z-index: -1;
+}
+.page-hero .section-shell {
+  position: relative;
+}
+.about-hero {
+  background-image: url("../assets/women%20and%20children.jpg");
+}
+/* Custom hero images supplied for this project. */
+.hero-art {
+  background-image: url("../assets/home.jpg");
+}
+.page-hero {
+  background-image: url("../assets/find%20a%20event.jpg");
+}
+.about-hero {
+  background-image: url("../assets/about%20us.jpg");
+}
+/* Keep the supplied hero image clear of the original decorative shapes. */
+.hero-art .sun,
+.hero-art .hill,
+.hero-art .people {
+  display: none;
+}
