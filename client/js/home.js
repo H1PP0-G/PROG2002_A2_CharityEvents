@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     status.textContent = `${data.count} opportunities to make an impact`;
     events.innerHTML = data.events.slice(0, 4).map(eventCard).join("");
+    removeBrokenImages(events);
   } catch (error) {
     status.textContent = error.message;
     status.classList.add("status-error");

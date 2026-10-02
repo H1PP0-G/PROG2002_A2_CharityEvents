@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       count.textContent = `${data.count} result${data.count === 1 ? "" : "s"}`;
       status.textContent = data.count ? "" : "No events match those filters.";
       results.innerHTML = data.events.map(eventCard).join("");
+      removeBrokenImages(results);
     } catch (failure) {
       status.textContent = failure.message;
     }
