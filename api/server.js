@@ -207,7 +207,7 @@ function validDate(value) {
 function fallbackSearch(query) {
   return fallbackEvents.filter(
     (event) =>
-      (!query.date || event.date >= query.date) &&
+      (!query.date || event.date === query.date) &&
       (!query.location ||
         `${event.city} ${event.venue}`
           .toLowerCase()
@@ -252,7 +252,7 @@ app.get("/api/events", async (req, res, next) => {
     const conditions = ["e.status = 'active'"];
     const params = [];
     if (date) {
-      conditions.push("e.event_date >= ?");
+      conditions.push("e.event_date = ?");
       params.push(date);
     }
     if (location) {
