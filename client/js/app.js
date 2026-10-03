@@ -67,6 +67,11 @@ function removeBrokenImages(container) {
     });
 }
 
+function eventStatus(dateString) {
+  const eventDate = new Date(`${dateString}T23:59:59`);
+  return eventDate < new Date() ? "Past" : "Upcoming";
+}
+
 function eventCard(event) {
   const image = getEventImage(event);
   return `
@@ -74,7 +79,7 @@ function eventCard(event) {
       <div class="event-image image-${escapeHtml(event.imageKey)}">
         ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(event.name)}">` : ""}
         <span class="event-tag">${escapeHtml(event.category.name)}</span>
-        <span class="event-status">Upcoming</span>
+        <span class="event-status">${eventStatus(event.date)}</span>
         <div class="image-symbol" aria-hidden="true">✦</div>
       </div>
       <div class="event-card-body">
