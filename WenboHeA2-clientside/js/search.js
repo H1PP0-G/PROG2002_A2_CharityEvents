@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     await search();
   } catch (failure) {
+    results.innerHTML = "";
+    count.textContent = "";
     status.textContent = failure.message;
   }
 
@@ -79,6 +81,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       results.innerHTML = data.events.map(eventCard).join("");
       removeBrokenImages(results);
     } catch (failure) {
+      results.innerHTML = "";
+      count.textContent = "";
       status.textContent = failure.message;
     }
   }

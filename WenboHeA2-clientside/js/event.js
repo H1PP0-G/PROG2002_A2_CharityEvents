@@ -78,6 +78,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("This feature is currently under construction."),
       );
   } catch (error) {
+    content.innerHTML = "";
+    content.hidden = true;
+    status.hidden = false;
     status.textContent = error.message;
+    status.classList.add("status-error");
   }
 });

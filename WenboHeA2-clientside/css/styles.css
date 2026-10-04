@@ -597,6 +597,9 @@ h2 {
 .event-image .image-symbol {
   z-index: 1;
 }
+.image-symbol {
+  display: none;
+}
 .detail-top .event-tag {
   position: static;
   display: inline-block;

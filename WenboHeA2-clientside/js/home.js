@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     events.innerHTML = data.events.slice(0, 4).map(eventCard).join("");
     removeBrokenImages(events);
   } catch (error) {
+    events.innerHTML = "";
     status.textContent = error.message;
     status.classList.add("status-error");
   }
