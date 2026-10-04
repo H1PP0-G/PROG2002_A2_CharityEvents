@@ -1,6 +1,7 @@
 const API_BASE = "/api";
 
 async function apiRequest(path, options = {}) {
+  // Keep fetch and response error handling in one reusable client function.
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { Accept: "application/json" },
     ...options,
@@ -38,6 +39,8 @@ function formatMoney(value) {
 }
 
 function escapeHtml(value) {
+  // textContent escapes user-controlled values before they are placed in a
+  // template, reducing the risk of injecting HTML into event cards.
   const div = document.createElement("div");
   div.textContent = value ?? "";
   return div.innerHTML;
@@ -68,11 +71,14 @@ function removeBrokenImages(container) {
 }
 
 function eventStatus(dateString) {
+  // The label is derived from today's date, so the same page works as time
+  // passes without manually editing the event card.
   const eventDate = new Date(`${dateString}T23:59:59`);
   return eventDate < new Date() ? "Past" : "Upcoming";
 }
 
 function eventCard(event) {
+  // Cards are rendered from API objects so Home and Search share one view.
   const image = getEventImage(event);
   return `
     <article class="event-card">

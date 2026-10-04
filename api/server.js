@@ -7,6 +7,9 @@ require("dotenv").config();
 const app = express();
 const port = Number(process.env.PORT || 3030);
 const clientDirectory = path.join(__dirname, "..", "client");
+
+// Express serves both the REST resources and the static client so the browser
+// uses one origin for pages, images and API requests.
 app.use(cors());
 app.use(express.json());
 app.use(express.static(clientDirectory));
@@ -96,7 +99,7 @@ const fallbackEvents = [
     "Neighbourhood Repair Lab",
     "Reduce waste and teach practical repair skills.",
     "Bring a small household item and learn from volunteer fixers while supporting circular economy education.",
-    "2026-12-05",
+    "2026-09-12",
     "10:00:00",
     "13:00:00",
     "Westside Community Hub",
@@ -178,6 +181,8 @@ const fallbackEvents = [
 }));
 
 function normaliseEvent(row) {
+  // Convert SQL column names and numeric strings into the JSON shape expected
+  // by the client. Progress is calculated once at the API boundary.
   return {
     id: row.event_id,
     name: row.name,
@@ -205,6 +210,9 @@ function validDate(value) {
   return !value || /^\d{4}-\d{2}-\d{2}$/.test(value);
 }
 function fallbackSearch(query) {
+  // This small read-only fallback keeps the interface demonstrable when a
+  // local MySQL service is temporarily unavailable; MySQL remains the source
+  // used whenever the connection succeeds.
   return fallbackEvents.filter(
     (event) =>
       (!query.date || event.date === query.date) &&
@@ -249,6 +257,8 @@ app.get("/api/events", async (req, res, next) => {
   if (!validDate(date))
     return res.status(400).json({ error: "Date must use YYYY-MM-DD format." });
   try {
+    // Build optional filters and pass their values separately. Parameterised
+    // queries prevent user-entered search text becoming SQL code.
     const conditions = ["e.status = 'active'"];
     const params = [];
     if (date) {
@@ -287,6 +297,8 @@ app.get("/api/events/:id", async (req, res, next) => {
       .status(400)
       .json({ error: "Event id must be a positive integer." });
   try {
+    // The :id path parameter identifies one resource, following the REST
+    // pattern demonstrated in Module 4.
     const [rows] = await pool.query(
       'SELECT e.*, c.name AS category_name, o.name AS organisation_name FROM events e JOIN categories c ON c.category_id=e.category_id JOIN organisations o ON o.organisation_id=e.organisation_id WHERE e.event_id=? AND e.status="active"',
       [id],
