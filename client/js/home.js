@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const status = document.querySelector("#home-status");
   const events = document.querySelector("#home-events");
   try {
+    // Home loads independent organisation and event resources in parallel,
+    // then updates the DOM after both API responses are available.
     const [orgs, data] = await Promise.all([
       apiRequest("/organisations"),
       apiRequest("/events"),

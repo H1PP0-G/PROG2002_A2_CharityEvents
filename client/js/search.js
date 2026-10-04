@@ -1,4 +1,6 @@
 function dateToIso(value) {
+  // Convert the user-friendly DD/MM/YYYY input into the ISO format expected
+  // by MySQL while rejecting impossible calendar dates.
   const match = value.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
   if (!match) return null;
   const [, day, month, year] = match;
@@ -18,6 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const count = document.querySelector("#result-count");
   const error = document.querySelector("#form-error");
   form.date.addEventListener("input", () => {
+    // Add separators only while typing digits. Backspace remains a normal
+    // editing action because the value is rebuilt from the current input.
     const digits = form.date.value.replace(/\D/g, "").slice(0, 8);
     const parts = [
       digits.slice(0, 2),
@@ -28,6 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
+    // Categories are loaded from the API so the filter stays consistent with
+    // the database rather than duplicating category names in HTML.
     const cats = await apiRequest("/categories");
     cats.forEach((item) => {
       const option = document.createElement("option");
@@ -41,6 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   form.addEventListener("submit", (event) => {
+    // Client-side validation gives immediate feedback before a request is sent.
     event.preventDefault();
     error.textContent = "";
     if (form.date.value && !dateToIso(form.date.value)) {
@@ -57,6 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   async function search() {
+    // URLSearchParams safely encodes optional filters for the REST endpoint.
     status.textContent = "Finding events...";
     const params = new URLSearchParams();
     const isoDate = dateToIso(form.date.value);

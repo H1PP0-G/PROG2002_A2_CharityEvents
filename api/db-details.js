@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+// Keep credentials outside the source code so the same API can run in each
+// student's local environment without exposing a password in GitHub.
 module.exports = {
   host: process.env.DB_HOST || "localhost",
   port: Number(process.env.DB_PORT || 3306),

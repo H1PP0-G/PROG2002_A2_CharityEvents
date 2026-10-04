@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS charityevents_db;
 USE charityevents_db;
 
+-- Re-running this file gives the marker a clean, repeatable database setup.
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS organisations;
@@ -47,6 +48,8 @@ CREATE TABLE events (
   INDEX idx_events_status (status)
 );
 
+-- Seed data is intentionally varied so Home, Search and Details can be
+-- demonstrated with several categories, cities, prices and goal amounts.
 INSERT INTO organisations (name, mission, email, phone, website) VALUES
 ('Harbour Hearts Foundation', 'We turn local generosity into practical support for families, wildlife and community health.', 'hello@harbourhearts.org.au', '+61 2 5550 1840', 'https://harbourhearts.org.au');
 
@@ -62,7 +65,7 @@ INSERT INTO events (organisation_id, category_id, name, purpose, description, ev
 (1, 2, 'A Night for New Beginnings', 'Fund transitional accommodation for women and children.', 'An elegant evening of local food, live stories and a three-course dinner supporting safe transitional accommodation.', '2026-10-24', '18:30:00', '22:30:00', 'The Glasshouse', '17 Market Street', 'Sydney', 120.00, 70000.00, 51200.00, 'gala'),
 (1, 3, 'Songs for the Sea', 'Protect coastal wildlife and restore beaches.', 'Local artists come together for a joyful acoustic concert with a direct focus on marine rescue and shoreline restoration.', '2026-11-07', '18:00:00', '21:30:00', 'The Enmore Theatre', '118-132 Enmore Road', 'Sydney', 45.00, 45000.00, 29350.00, 'music'),
 (1, 4, 'Bid for Bright Futures', 'Provide laptops and tutoring for young people.', 'Discover donated art, dining and travel experiences in a relaxed online and in-person auction supporting digital access.', '2026-11-21', '14:00:00', '18:00:00', 'The Foundry Hall', '8 Union Lane', 'Melbourne', 10.00, 25000.00, 9400.00, 'auction'),
-(1, 5, 'Neighbourhood Repair Lab', 'Reduce waste and teach practical repair skills.', 'Bring a small household item and learn from volunteer fixers while supporting circular economy education.', '2026-12-05', '10:00:00', '13:00:00', 'Westside Community Hub', '44 Park Road', 'Brisbane', 0.00, 12000.00, 7100.00, 'workshop'),
+(1, 5, 'Neighbourhood Repair Lab', 'Reduce waste and teach practical repair skills.', 'Bring a small household item and learn from volunteer fixers while supporting circular economy education.', '2026-09-12', '10:00:00', '13:00:00', 'Westside Community Hub', '44 Park Road', 'Brisbane', 0.00, 12000.00, 7100.00, 'workshop'),
 (1, 1, 'Twilight Steps Challenge', 'Support mobility equipment grants.', 'A friendly twilight walk with accessible routes, music and a finish-line picnic for all ages and abilities.', '2027-01-16', '16:30:00', '20:00:00', 'Riverside Park', '2 River Avenue', 'Adelaide', 18.00, 22000.00, 6600.00, 'walk'),
 (1, 2, 'Table of Thanks', 'Fund meals for older people living alone.', 'Share a long-table meal with neighbours and hear how community kitchens create connection and dignity.', '2027-02-06', '18:00:00', '22:00:00', 'Laneway Kitchen', '9 Victoria Street', 'Perth', 95.00, 38000.00, 20100.00, 'dinner'),
 (1, 3, 'Open Mic for Mental Health', 'Expand free peer-support groups.', 'An inclusive open mic night celebrating local voices and raising funds for free community mental health groups.', '2027-03-13', '17:30:00', '21:00:00', 'Northside Arts Centre', '12 Station Road', 'Hobart', 20.00, 18000.00, 11800.00, 'mic');
